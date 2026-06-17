@@ -1,0 +1,310 @@
+{
+  "timepoint": 255000000.0,
+  "center_csv_idx": 1405,
+  "center_timestamp": 7334861085.0,
+  "start_csv_idx": 1395,
+  "end_csv_idx": 1416,
+  "interval_length": 21,
+  "num_images_saved": 21,
+  "window_size": 10,
+  "downsample_factor": 1.0,
+  "wsi_width": 53248,
+  "wsi_height": 45056,
+  "thumbnail_level": 2,
+  "image_info": [
+    {
+      "frame_idx": 0,
+      "csv_row_idx": 1395,
+      "timestamp": 7333753084,
+      "image_filename": "Frame_0000.png",
+      "source_image": "E:\\For LLM Study\\15468-a-8-1.svs",
+      "downsample_factor": 1.0,
+      "viewer_bounds": [
+        6087.578399442581,
+        36994.606368308174,
+        8155.297737858638,
+        38247.91511732488
+      ]
+    },
+    {
+      "frame_idx": 1,
+      "csv_row_idx": 1396,
+      "timestamp": 7333865107,
+      "image_filename": "Frame_0001.png",
+      "source_image": "E:\\For LLM Study\\15468-a-8-1.svs",
+      "downsample_factor": 1.0,
+      "viewer_bounds": [
+        6087.578399442581,
+        36994.606368308174,
+        8155.297737858638,
+        38247.91511732488
+      ]
+    },
+    {
+      "frame_idx": 2,
+      "csv_row_idx": 1397,
+      "timestamp": 7333977254,
+      "image_filename": "Frame_0002.png",
+      "source_image": "E:\\For LLM Study\\15468-a-8-1.svs",
+      "downsample_factor": 1.0,
+      "viewer_bounds": [
+        6087.578399442581,
+        36994.606368308174,
+        8155.297737858638,
+        38247.91511732488
+      ]
+    },
+    {
+      "frame_idx": 3,
+      "csv_row_idx": 1398,
+      "timestamp": 7334086309,
+      "image_filename": "Frame_0003.png",
+      "source_image": "E:\\For LLM Study\\15468-a-8-1.svs",
+      "downsample_factor": 1.0,
+      "viewer_bounds": [
+        6087.578399442581,
+        36994.606368308174,
+        8155.297737858638,
+        38247.91511732488
+      ]
+    },
+    {
+      "frame_idx": 4,
+      "csv_row_idx": 1399,
+      "timestamp": 7334198310,
+      "image_filename": "Frame_0004.png",
+      "source_image": "E:\\For LLM Study\\15468-a-8-1.svs",
+      "downsample_factor": 1.0,
+      "viewer_bounds": [
+        6087.578399442581,
+        36994.606368308174,
+        8155.297737858638,
+        38247.91511732488
+      ]
+    },
+    {
+      "frame_idx": 5,
+      "csv_row_idx": 1400,
+      "timestamp": 7334307894,
+      "image_filename": "Frame_0005.png",
+      "source_image": "E:\\For LLM Study\\15468-a-8-1.svs",
+      "downsample_factor": 1.0,
+      "viewer_bounds": [
+        6087.578399442581,
+        36994.606368308174,
+        8155.297737858638,
+        38247.91511732488
+      ]
+    },
+    {
+      "frame_idx": 6,
+      "csv_row_idx": 1401,
+      "timestamp": 7334419067,
+      "image_filename": "Frame_0006.png",
+      "source_image": "E:\\For LLM Study\\15468-a-8-1.svs",
+      "downsample_factor": 1.0,
+      "viewer_bounds": [
+        6087.578399442581,
+        36994.606368308174,
+        8155.297737858638,
+        38247.91511732488
+      ]
+    },
+    {
+      "frame_idx": 7,
+      "csv_row_idx": 1402,
+      "timestamp": 7334529196,
+      "image_filename": "Frame_0007.png",
+      "source_image": "E:\\For LLM Study\\15468-a-8-1.svs",
+      "downsample_factor": 1.0,
+      "viewer_bounds": [
+        6087.578399442581,
+        36994.606368308174,
+        8155.297737858638,
+        38247.91511732488
+      ]
+    },
+    {
+      "frame_idx": 8,
+      "csv_row_idx": 1403,
+      "timestamp": 7334639221,
+      "image_filename": "Frame_0008.png",
+      "source_image": "E:\\For LLM Study\\15468-a-8-1.svs",
+      "downsample_factor": 1.0,
+      "viewer_bounds": [
+        6087.578399442581,
+        36994.606368308174,
+        8155.297737858638,
+        38247.91511732488
+      ]
+    },
+    {
+      "frame_idx": 9,
+      "csv_row_idx": 1404,
+      "timestamp": 7334750236,
+      "image_filename": "Frame_0009.png",
+      "source_image": "E:\\For LLM Study\\15468-a-8-1.svs",
+      "downsample_factor": 1.0,
+      "viewer_bounds": [
+        6087.578399442581,
+        36994.606368308174,
+        8155.297737858638,
+        38247.91511732488
+      ]
+    },
+    {
+      "frame_idx": 10,
+      "csv_row_idx": 1405,
+      "timestamp": 7334861085,
+      "image_filename": "Frame_0010.png",
+      "source_image": "E:\\For LLM Study\\15468-a-8-1.svs",
+      "downsample_factor": 1.0,
+      "viewer_bounds": [
+        6136.558281588061,
+        37042.62586060767,
+        8204.277620004119,
+        38295.93460962437
+      ]
+    },
+    {
+      "frame_idx": 11,
+      "csv_row_idx": 1406,
+      "timestamp": 7334972105,
+      "image_filename": "Frame_0011.png",
+      "source_image": "E:\\For LLM Study\\15468-a-8-1.svs",
+      "downsample_factor": 1.0,
+      "viewer_bounds": [
+        6142.320620664002,
+        37046.46741999163,
+        8210.039959080059,
+        38299.776169008335
+      ]
+    },
+    {
+      "frame_idx": 12,
+      "csv_row_idx": 1407,
+      "timestamp": 7335083661,
+      "image_filename": "Frame_0012.png",
+      "source_image": "E:\\For LLM Study\\15468-a-8-1.svs",
+      "downsample_factor": 1.0,
+      "viewer_bounds": [
+        6145.20179,
+        37044.546640299646,
+        8212.921128618027,
+        38297.85538931635
+      ]
+    },
+    {
+      "frame_idx": 13,
+      "csv_row_idx": 1408,
+      "timestamp": 7335193973,
+      "image_filename": "Frame_0013.png",
+      "source_image": "E:\\For LLM Study\\15468-a-8-1.svs",
+      "downsample_factor": 1.0,
+      "viewer_bounds": [
+        6145.20179,
+        37044.546640299646,
+        8212.921128618027,
+        38297.85538931635
+      ]
+    },
+    {
+      "frame_idx": 14,
+      "csv_row_idx": 1409,
+      "timestamp": 7335305062,
+      "image_filename": "Frame_0014.png",
+      "source_image": "E:\\For LLM Study\\15468-a-8-1.svs",
+      "downsample_factor": 1.0,
+      "viewer_bounds": [
+        6145.20179,
+        37044.546640299646,
+        8212.921128618027,
+        38297.85538931635
+      ]
+    },
+    {
+      "frame_idx": 15,
+      "csv_row_idx": 1410,
+      "timestamp": 7335417123,
+      "image_filename": "Frame_0015.png",
+      "source_image": "E:\\For LLM Study\\15468-a-8-1.svs",
+      "downsample_factor": 1.0,
+      "viewer_bounds": [
+        6145.20179,
+        37044.546640299646,
+        8212.921128618027,
+        38297.85538931635
+      ]
+    },
+    {
+      "frame_idx": 16,
+      "csv_row_idx": 1411,
+      "timestamp": 7335529203,
+      "image_filename": "Frame_0016.png",
+      "source_image": "E:\\For LLM Study\\15468-a-8-1.svs",
+      "downsample_factor": 1.0,
+      "viewer_bounds": [
+        6145.20179,
+        37044.546640299646,
+        8212.921128618027,
+        38297.85538931635
+      ]
+    },
+    {
+      "frame_idx": 17,
+      "csv_row_idx": 1412,
+      "timestamp": 7335637372,
+      "image_filename": "Frame_0017.png",
+      "source_image": "E:\\For LLM Study\\15468-a-8-1.svs",
+      "downsample_factor": 1.0,
+      "viewer_bounds": [
+        6145.20179,
+        37044.546640299646,
+        8212.921128618027,
+        38297.85538931635
+      ]
+    },
+    {
+      "frame_idx": 18,
+      "csv_row_idx": 1413,
+      "timestamp": 7335749274,
+      "image_filename": "Frame_0018.png",
+      "source_image": "E:\\For LLM Study\\15468-a-8-1.svs",
+      "downsample_factor": 1.0,
+      "viewer_bounds": [
+        6145.20179,
+        37044.546640299646,
+        8212.921128618027,
+        38297.85538931635
+      ]
+    },
+    {
+      "frame_idx": 19,
+      "csv_row_idx": 1414,
+      "timestamp": 7335858794,
+      "image_filename": "Frame_0019.png",
+      "source_image": "E:\\For LLM Study\\15468-a-8-1.svs",
+      "downsample_factor": 1.0,
+      "viewer_bounds": [
+        6145.20179,
+        37044.546640299646,
+        8212.921128618027,
+        38297.85538931635
+      ]
+    },
+    {
+      "frame_idx": 20,
+      "csv_row_idx": 1415,
+      "timestamp": 7335969172,
+      "image_filename": "Frame_0020.png",
+      "source_image": "E:\\For LLM Study\\15468-a-8-1.svs",
+      "downsample_factor": 1.0,
+      "viewer_bounds": [
+        6145.20179,
+        37044.546640299646,
+        8212.921128618027,
+        38297.85538931635
+      ]
+    }
+  ]
+}

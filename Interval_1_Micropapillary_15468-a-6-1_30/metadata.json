@@ -1,9 +1,9 @@
 {
   "timepoint": 129000000.0,
-  "center_csv_idx": 861,
-  "center_timestamp": 7246585013.0,
-  "start_csv_idx": 851,
-  "end_csv_idx": 872,
+  "center_csv_idx": 565,
+  "center_timestamp": 7208882139.0,
+  "start_csv_idx": 555,
+  "end_csv_idx": 576,
   "interval_length": 21,
   "num_images_saved": 21,
   "window_size": 10,
@@ -14,296 +14,296 @@
   "image_info": [
     {
       "frame_idx": 0,
-      "csv_row_idx": 851,
-      "timestamp": 7240840084,
+      "csv_row_idx": 555,
+      "timestamp": 7207779006,
       "image_filename": "Frame_0000.png",
       "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
       "downsample_factor": 1.0,
       "viewer_bounds": [
-        7470.390360378128,
-        13880.064145768822,
-        12470.621184764,
-        16910.858955719385
+        46211.96490940563,
+        33624.358228269775,
+        49570.38563763112,
+        35660.00108
       ]
     },
     {
       "frame_idx": 1,
-      "csv_row_idx": 852,
-      "timestamp": 7240951156,
+      "csv_row_idx": 556,
+      "timestamp": 7207886916,
       "image_filename": "Frame_0001.png",
       "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
       "downsample_factor": 1.0,
       "viewer_bounds": [
-        8121.623905255494,
-        14608.317114571964,
-        11480.04463348098,
-        16643.959961917186
+        46211.96490940563,
+        33624.358228269775,
+        49570.38563763112,
+        35660.00108
       ]
     },
     {
       "frame_idx": 2,
-      "csv_row_idx": 853,
-      "timestamp": 7241061277,
+      "csv_row_idx": 557,
+      "timestamp": 7207997999,
       "image_filename": "Frame_0002.png",
       "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
       "downsample_factor": 1.0,
       "viewer_bounds": [
-        8121.623905255494,
-        14608.317114571964,
-        11480.04463348098,
-        16643.959961917186
+        46211.96490940563,
+        33624.358228269775,
+        49570.38563763112,
+        35660.00108
       ]
     },
     {
       "frame_idx": 3,
-      "csv_row_idx": 854,
-      "timestamp": 7241171804,
+      "csv_row_idx": 558,
+      "timestamp": 7208110156,
       "image_filename": "Frame_0003.png",
       "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
       "downsample_factor": 1.0,
       "viewer_bounds": [
-        8121.623905255494,
-        14608.317114571964,
-        11480.04463348098,
-        16643.959961917186
+        46211.96490940563,
+        33624.358228269775,
+        49570.38563763112,
+        35660.00108
       ]
     },
     {
       "frame_idx": 4,
-      "csv_row_idx": 855,
-      "timestamp": 7241281923,
+      "csv_row_idx": 559,
+      "timestamp": 7208220840,
       "image_filename": "Frame_0004.png",
       "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
       "downsample_factor": 1.0,
       "viewer_bounds": [
-        8121.623905255494,
-        14608.317114571964,
-        11480.04463348098,
-        16643.959961917186
+        46211.96490940563,
+        33624.358228269775,
+        49570.38563763112,
+        35660.00108
       ]
     },
     {
       "frame_idx": 5,
-      "csv_row_idx": 856,
-      "timestamp": 7241391002,
+      "csv_row_idx": 560,
+      "timestamp": 7208330945,
       "image_filename": "Frame_0005.png",
       "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
       "downsample_factor": 1.0,
       "viewer_bounds": [
-        8121.623905255494,
-        14608.317114571964,
-        11480.04463348098,
-        16643.959961917186
+        46211.96490940563,
+        33624.358228269775,
+        49570.38563763112,
+        35660.00108
       ]
     },
     {
       "frame_idx": 6,
-      "csv_row_idx": 857,
-      "timestamp": 7241501075,
+      "csv_row_idx": 561,
+      "timestamp": 7208441896,
       "image_filename": "Frame_0006.png",
       "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
       "downsample_factor": 1.0,
       "viewer_bounds": [
-        8121.623905255494,
-        14608.317114571964,
-        11480.04463348098,
-        16643.959961917186
+        46211.96490940563,
+        33624.358228269775,
+        49570.38563763112,
+        35660.00108
       ]
     },
     {
       "frame_idx": 7,
-      "csv_row_idx": 858,
-      "timestamp": 7241611051,
+      "csv_row_idx": 562,
+      "timestamp": 7208552094,
       "image_filename": "Frame_0007.png",
       "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
       "downsample_factor": 1.0,
       "viewer_bounds": [
-        8121.623905255494,
-        14608.317114571964,
-        11480.04463348098,
-        16643.959961917186
+        46211.96490940563,
+        33624.358228269775,
+        49570.38563763112,
+        35660.00108
       ]
     },
     {
       "frame_idx": 8,
-      "csv_row_idx": 859,
-      "timestamp": 7241719653,
+      "csv_row_idx": 563,
+      "timestamp": 7208664088,
       "image_filename": "Frame_0008.png",
       "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
       "downsample_factor": 1.0,
       "viewer_bounds": [
-        8121.623905255494,
-        14608.317114571964,
-        11480.04463348098,
-        16643.959961917186
+        46211.96490940563,
+        33624.358228269775,
+        49570.38563763112,
+        35660.00108
       ]
     },
     {
       "frame_idx": 9,
-      "csv_row_idx": 860,
-      "timestamp": 7241830446,
+      "csv_row_idx": 564,
+      "timestamp": 7208774095,
       "image_filename": "Frame_0009.png",
       "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
       "downsample_factor": 1.0,
       "viewer_bounds": [
-        8121.623905255494,
-        14608.317114571964,
-        11480.04463348098,
-        16643.959961917186
+        46211.96490940563,
+        33624.358228269775,
+        49570.38563763112,
+        35660.00108
       ]
     },
     {
       "frame_idx": 10,
-      "csv_row_idx": 861,
-      "timestamp": 7246585013,
+      "csv_row_idx": 565,
+      "timestamp": 7208882139,
       "image_filename": "Frame_0010.png",
       "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
       "downsample_factor": 1.0,
       "viewer_bounds": [
-        8121.623905255494,
-        14608.317114571964,
-        11480.04463348098,
-        16643.959961917186
+        46211.96490940563,
+        33624.358228269775,
+        49570.38563763112,
+        35660.00108
       ]
     },
     {
       "frame_idx": 11,
-      "csv_row_idx": 862,
-      "timestamp": 7269435277,
+      "csv_row_idx": 566,
+      "timestamp": 7208991650,
       "image_filename": "Frame_0011.png",
       "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
       "downsample_factor": 1.0,
       "viewer_bounds": [
-        8121.623905255494,
-        14608.317114571964,
-        11480.04463348098,
-        16643.959961917186
+        46211.96490940563,
+        33624.358228269775,
+        49570.38563763112,
+        35660.00108
       ]
     },
     {
       "frame_idx": 12,
-      "csv_row_idx": 863,
-      "timestamp": 7269545194,
+      "csv_row_idx": 567,
+      "timestamp": 7209102826,
       "image_filename": "Frame_0012.png",
       "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
       "downsample_factor": 1.0,
       "viewer_bounds": [
-        8121.623905255494,
-        14608.317114571964,
-        11480.04463348098,
-        16643.959961917186
+        46211.96490940563,
+        33624.358228269775,
+        49570.38563763112,
+        35660.00108
       ]
     },
     {
       "frame_idx": 13,
-      "csv_row_idx": 864,
-      "timestamp": 7269655230,
+      "csv_row_idx": 568,
+      "timestamp": 7209213956,
       "image_filename": "Frame_0013.png",
       "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
       "downsample_factor": 1.0,
       "viewer_bounds": [
-        8121.623905255494,
-        14608.317114571964,
-        11480.04463348098,
-        16643.959961917186
+        46211.96490940563,
+        33624.358228269775,
+        49570.38563763112,
+        35660.00108
       ]
     },
     {
       "frame_idx": 14,
-      "csv_row_idx": 865,
-      "timestamp": 7269766776,
+      "csv_row_idx": 569,
+      "timestamp": 7209321984,
       "image_filename": "Frame_0014.png",
       "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
       "downsample_factor": 1.0,
       "viewer_bounds": [
-        8121.623905255494,
-        14608.317114571964,
-        11480.04463348098,
-        16643.959961917186
+        46211.96490940563,
+        33624.358228269775,
+        49570.38563763112,
+        35660.00108
       ]
     },
     {
       "frame_idx": 15,
-      "csv_row_idx": 866,
-      "timestamp": 7269875169,
+      "csv_row_idx": 570,
+      "timestamp": 7209428869,
       "image_filename": "Frame_0015.png",
       "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
       "downsample_factor": 1.0,
       "viewer_bounds": [
-        8121.623905255494,
-        14608.317114571964,
-        11480.04463348098,
-        16643.959961917186
+        46211.96490940563,
+        33624.358228269775,
+        49570.38563763112,
+        35660.00108
       ]
     },
     {
       "frame_idx": 16,
-      "csv_row_idx": 867,
-      "timestamp": 7269987269,
+      "csv_row_idx": 571,
+      "timestamp": 7209536880,
       "image_filename": "Frame_0016.png",
       "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
       "downsample_factor": 1.0,
       "viewer_bounds": [
-        8121.623905255494,
-        14608.317114571964,
-        11480.04463348098,
-        16643.959961917186
+        46211.96490940563,
+        33624.358228269775,
+        49570.38563763112,
+        35660.00108
       ]
     },
     {
       "frame_idx": 17,
-      "csv_row_idx": 868,
-      "timestamp": 7270097841,
+      "csv_row_idx": 572,
+      "timestamp": 7209644038,
       "image_filename": "Frame_0017.png",
       "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
       "downsample_factor": 1.0,
       "viewer_bounds": [
-        8121.623905255494,
-        14608.317114571964,
-        11480.04463348098,
-        16643.959961917186
+        46211.96490940563,
+        33624.358228269775,
+        49570.38563763112,
+        35660.00108
       ]
     },
     {
       "frame_idx": 18,
-      "csv_row_idx": 869,
-      "timestamp": 7270205028,
+      "csv_row_idx": 573,
+      "timestamp": 7209755988,
       "image_filename": "Frame_0018.png",
       "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
       "downsample_factor": 1.0,
       "viewer_bounds": [
-        8121.623905255494,
-        14608.317114571964,
-        11480.04463348098,
-        16643.959961917186
+        46211.96490940563,
+        33624.358228269775,
+        49570.38563763112,
+        35660.00108
       ]
     },
     {
       "frame_idx": 19,
-      "csv_row_idx": 870,
-      "timestamp": 7270315232,
+      "csv_row_idx": 574,
+      "timestamp": 7209866074,
       "image_filename": "Frame_0019.png",
       "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
       "downsample_factor": 1.0,
       "viewer_bounds": [
-        8121.623905255494,
-        14608.317114571964,
-        11480.04463348098,
-        16643.959961917186
+        46179.20743829892,
+        33666.47497683555,
+        49537.62816652441,
+        35702.11782418077
       ]
     },
     {
       "frame_idx": 20,
-      "csv_row_idx": 871,
-      "timestamp": 7270423820,
+      "csv_row_idx": 575,
+      "timestamp": 7209977411,
       "image_filename": "Frame_0020.png",
       "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
       "downsample_factor": 1.0,
       "viewer_bounds": [
-        8121.623905255494,
-        14608.317114571964,
-        11480.04463348098,
-        16643.959961917186
+        46166.72840168685,
+        34093.88198079922,
+        49525.14912991234,
+        36129.52482814445
       ]
     }
   ]
