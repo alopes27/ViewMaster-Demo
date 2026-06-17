@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VM</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    font-size: 13px;
+    background: #2b2b2b;
+    color: #e0e0e0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ── Toolbar ── */
+  #toolbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    background: #3c3c3c;
+    border-bottom: 1px solid #555;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+  }
+  #toolbar label { color: #ccc; font-size: 12px; }
+
+  .tb-btn {
+    padding: 5px 12px;
+    border-radius: 4px;
+    border: 2px solid #888;
+    background: #555;
+    color: #eee;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .tb-btn:hover { background: #666; }
+  .tb-btn.active { background: #4CAF50; border-color: #45a049; color: #fff; }
+  .tb-btn.active.thumb { background: #2196F3; border-color: #1976D2; }
+
+  #colorSwatch {
+    width: 32px; height: 24px;
+    border: 2px solid #888;
+    border-radius: 3px;
+    cursor: pointer;
+    background: #00ff00;
+  }
+  #sizeInput {
+    width: 54px;
+    padding: 3px 4px;
+    border: 1px solid #888;
+    border-radius: 3px;
+    background: #444;
+    color: #eee;
+    font-size: 12px;
+  }
+
+  #gazeControls { display: none; align-items: center; gap: 6px; }
+  #gazeControls.visible { display: flex; }
+
+  #statusBar {
+    margin-left: auto;
+    color: #aaa;
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 500px;
+  }
+
+  /* ── Main layout ── */
+  #main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  /* ── PDF panel ── */
+  #pdfPanel {
+    width: 30%;
+    min-width: 240px;
+    display: flex;
+    flex-direction: column;
+    background: #1e1e1e;
+    border-right: 3px solid #555;
+    overflow: hidden;
+  }
+
+  #pdfHeader {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 8px;
+    background: #333;
+    border-bottom: 1px solid #555;
+    flex-shrink: 0;
+  }
+  #pdfHeader button {
+    padding: 3px 10px;
+    border: 1px solid #777;
+    background: #555;
+    color: #eee;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 11px;
+  }
+  #pdfHeader button:hover { background: #666; }
+  #pdfHeader button:disabled { opacity: 0.4; cursor: default; }
+  #pageInfo { font-size: 11px; color: #aaa; margin-left: 4px; }
+
+  #pdfScroll {
+    flex: 1;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 8px;
+    cursor: default;
+  }
+
+  #pdfCanvas {
+    display: block;
+    background: white;
+    cursor: pointer;
+  }
+
+  #pdfPlaceholder {
+    color: #777;
+    text-align: center;
+    margin-top: 80px;
+    line-height: 1.8;
+  }
+
+  /* ── Resizer ── */
+  #resizer {
+    width: 5px;
+    background: #555;
+    cursor: col-resize;
+    flex-shrink: 0;
+  }
+  #resizer:hover { background: #888; }
+
+  /* ── Viewer panel ── */
+  #viewerPanel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: #1a1a1a;
+  }
+
+  /* Image area */
+  #imageArea {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+    position: relative;
+  }
+
+  #imageCanvas {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  #imagePlaceholder {
+    color: #555;
+    text-align: center;
+    line-height: 2;
+    font-size: 13px;
+  }
+
+  /* Thumbnail overlay */
+  #thumbOverlay {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: 2px solid #444;
+    background: white;
+    display: none;
+    z-index: 10;
+  }
+  #thumbOverlay canvas { display: block; }
+
+  /* Video area */
+  #videoArea {
+    flex: 1;
+    overflow: hidden;
+    background: #000;
+    display: none;
+    flex-direction: column;
+  }
+  #videoEl {
+    flex: 1;
+    width: 100%;
+    background: #000;
+    min-height: 0;
+  }
+
+  /* Controls */
+  #imageControls {
+    background: #2c2c2c;
+    border-top: 1px solid #444;
+    padding: 6px 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+  #imageControls label { color: #aaa; font-size: 11px; white-space: nowrap; }
+  #frameSlider { flex: 1; accent-color: #4CAF50; }
+  #frameSpinbox {
+    width: 62px;
+    padding: 2px 4px;
+    border: 1px solid #666;
+    border-radius: 3px;
+    background: #3a3a3a;
+    color: #eee;
+    font-size: 11px;
+  }
+  #frameInfo { font-size: 10px; color: #888; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 320px; }
+
+  #videoControls {
+    background: #2c2c2c;
+    border-top: 1px solid #444;
+    padding: 6px 10px;
+    display: none;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+  #videoControls button {
+    padding: 4px 10px;
+    border: 1px solid #777;
+    background: #555;
+    color: #eee;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 11px;
+  }
+  #videoControls button:hover { background: #666; }
+  #videoSlider { flex: 1; accent-color: #2196F3; }
+  #videoInfo { font-size: 10px; color: #888; }
+
+  /* ── Open PDF button overlay ── */
+  #openPdfBtn {
+    display: block;
+    margin: 20px auto 0;
+    padding: 7px 16px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  #openPdfBtn:hover { background: #5CBF60; }
+
+  /* ── Color picker (hidden native input) ── */
+  #colorPicker { display: none; }
+</style>
+</head>
+<body>
+
+<!-- Toolbar -->
+<div id="toolbar">
+  <button class="tb-btn" id="openBtn" onclick="triggerOpenPdf()">Open PDF</button>
+
+  <div id="gazeControls">
+    <label>Circle Size:</label>
+    <input type="number" id="sizeInput" value="5" min="1" max="100"> px
+    <label>Color:</label>
+    <div id="colorSwatch" onclick="document.getElementById('colorPicker').click()"></div>
+    <input type="color" id="colorPicker" value="#00ff00" oninput="onColorChange(this.value)">
+  </div>
+
+  <button class="tb-btn" id="gazeBtn" onclick="toggleGaze()">Eye Gaze</button>
+  <button class="tb-btn thumb" id="thumbBtn" onclick="toggleThumbnail()">Thumbnail</button>
+
+  <div id="statusBar">Ready — open a PDF to begin</div>
+</div>
+
+<!-- Main -->
+<div id="main">
+
+  <!-- PDF Panel -->
+  <div id="pdfPanel">
+    <div id="pdfHeader">
+      <button id="prevBtn" onclick="prevPage()" disabled>◀ Prev</button>
+      <button id="nextBtn" onclick="nextPage()" disabled>Next ▶</button>
+      <span id="pageInfo">Page 0/0</span>
+    </div>
+    <div id="pdfScroll" onclick="onPdfClick(event)">
+      <div id="pdfPlaceholder">
+        No PDF loaded<br><br>
+        <button id="openPdfBtn" onclick="triggerOpenPdf()">Open PDF</button>
+      </div>
+      <canvas id="pdfCanvas" style="display:none;"></canvas>
+    </div>
+  </div>
+
+  <!-- Resizer -->
+  <div id="resizer"></div>
+
+  <!-- Viewer Panel -->
+  <div id="viewerPanel">
+    <!-- Image area -->
+    <div id="imageArea">
+      <div id="imagePlaceholder">No images loaded<br><br>Click a folder link in the PDF to load image sequence</div>
+      <canvas id="imageCanvas" style="display:none;"></canvas>
+      <!-- Thumbnail overlay -->
+      <div id="thumbOverlay"><canvas id="thumbCanvas"></canvas></div>
+    </div>
+
+    <!-- Video area (hidden by default) -->
+    <div id="videoArea">
+      <video id="videoEl" controls></video>
+    </div>
+
+    <!-- Image controls -->
+    <div id="imageControls">
+      <label>Frame:</label>
+      <input type="range" id="frameSlider" min="0" max="0" value="0" oninput="onSliderInput(this.value)">
+      <input type="number" id="frameSpinbox" min="0" max="0" value="0" oninput="onSpinboxInput(this.value)">
+      <span id="frameInfo">No images loaded</span>
+    </div>
+
+    <!-- Video controls (hidden by default — using native video controls) -->
+    <div id="videoControls">
+      <span id="videoInfo">No video loaded</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- Hidden file input for PDF -->
+<input type="file" id="pdfFileInput" accept=".pdf" style="display:none" onchange="onPdfFileSelected(this)">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+// ============================================================================
+// PDF.js setup
+// ============================================================================
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+  'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+// ============================================================================
+// State
+// ============================================================================
+const state = {
+  // PDF
+  pdfDoc: null,
+  currentPage: 1,
+  pdfLinks: [],          // [{rect, uri}, ...] for current page
+  pdfScale: 1,
+  pdfPageWidth: 0,
+  pdfPageHeight: 0,
+
+  // Image sequence
+  imageUrls: [],         // ordered list of Frame image URLs
+  currentFrame: 0,
+  midpointFrame: 0,
+  folderBaseUrl: null,   // base URL of the Images/ folder (without trailing slash)
+  parentBaseUrl: null,   // parent of Images/ (for npy, thumbnail, metadata)
+
+  // Eye gaze
+  gazeEnabled: false,
+  gazeData: null,        // Float32Array of shape [N, 2]
+  gazeColor: [0, 255, 0],
+  gazeSize: 5,
+  downsampleFactor: 1.0,
+
+  // Thumbnail
+  thumbEnabled: false,
+  thumbImage: null,      // ImageBitmap of thumbnail.png
+  thumbMetadata: null,
+
+  // Video
+  videoMode: false,
+
+  // Image rendering
+  imageNaturalW: 0,
+  imageNaturalH: 0,
+};
+
+// ============================================================================
+// Utility
+// ============================================================================
+function setStatus(msg) {
+  document.getElementById('statusBar').textContent = msg;
+}
+
+function joinUrl(base, path) {
+  // Ensures exactly one slash between base and path
+  return base.replace(/\/?$/, '/') + path.replace(/^\//, '');
+}
+
+// ============================================================================
+// PDF loading & rendering
+// ============================================================================
+function triggerOpenPdf() {
+  document.getElementById('pdfFileInput').click();
+}
+
+async function onPdfFileSelected(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const arrayBuffer = await file.arrayBuffer();
+  const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
+  state.pdfDoc = await loadingTask.promise;
+  state.currentPage = 1;
+  document.getElementById('pdfPlaceholder').style.display = 'none';
+  document.getElementById('pdfCanvas').style.display = 'block';
+  await renderPdfPage();
+  setStatus(`Loaded PDF: ${file.name}`);
+}
+
+async function renderPdfPage() {
+  if (!state.pdfDoc) return;
+  const page = await state.pdfDoc.getPage(state.currentPage);
+  const pdfPanel = document.getElementById('pdfPanel');
+  const scrollEl = document.getElementById('pdfScroll');
+  const availableWidth = scrollEl.clientWidth - 16; // padding
+  const viewport0 = page.getViewport({ scale: 1 });
+  const scale = availableWidth / viewport0.width;
+  const viewport = page.getViewport({ scale });
+
+  state.pdfScale = scale;
+  state.pdfPageWidth = viewport0.width;
+  state.pdfPageHeight = viewport0.height;
+
+  const canvas = document.getElementById('pdfCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = viewport.width;
+  canvas.height = viewport.height;
+
+  await page.render({ canvasContext: ctx, viewport }).promise;
+
+  // Extract links
+  const annotations = await page.getAnnotations();
+  state.pdfLinks = annotations
+    .filter(a => a.subtype === 'Link' && a.url)
+    .map(a => ({
+      rect: a.rect,   // [x0, y0, x1, y1] in PDF user space
+      uri: a.url
+    }));
+
+  // Update controls
+  document.getElementById('prevBtn').disabled = state.currentPage <= 1;
+  document.getElementById('nextBtn').disabled = state.currentPage >= state.pdfDoc.numPages;
+  document.getElementById('pageInfo').textContent =
+    `Page ${state.currentPage}/${state.pdfDoc.numPages}`;
+}
+
+async function prevPage() {
+  if (state.currentPage > 1) { state.currentPage--; await renderPdfPage(); }
+}
+async function nextPage() {
+  if (state.pdfDoc && state.currentPage < state.pdfDoc.numPages) {
+    state.currentPage++; await renderPdfPage();
+  }
+}
+
+// ============================================================================
+// PDF click → link detection
+// ============================================================================
+function onPdfClick(event) {
+  const canvas = document.getElementById('pdfCanvas');
+  if (canvas.style.display === 'none' || !state.pdfLinks.length) return;
+
+  const rect = canvas.getBoundingClientRect();
+  // Click relative to canvas in CSS pixels
+  const cssX = event.clientX - rect.left;
+  const cssY = event.clientY - rect.top;
+
+  // CSS pixels → PDF user space
+  const pdfX = (cssX / rect.width) * state.pdfPageWidth;
+  // PDF origin is bottom-left; canvas origin is top-left
+  const pdfY = state.pdfPageHeight - (cssY / rect.height) * state.pdfPageHeight;
+
+  const PAD = 4; // tolerance in PDF points
+
+  for (const link of state.pdfLinks) {
+    const [x0, y0, x1, y1] = link.rect;
+    if (pdfX >= x0 - PAD && pdfX <= x1 + PAD &&
+        pdfY >= y0 - PAD && pdfY <= y1 + PAD) {
+      onLinkClicked(link.uri);
+      return;
+    }
+  }
+}
+
+// ============================================================================
+// Link handler — decide image folder vs video
+// ============================================================================
+async function onLinkClicked(uri) {
+  setStatus(`Loading: ${uri}`);
+
+  // Detect video by extension
+  if (/\.mp4(\?.*)?$/i.test(uri)) {
+    loadVideo(uri);
+    return;
+  }
+
+  // Otherwise treat as image folder URL
+  await loadImageFolder(uri);
+}
+
+// ============================================================================
+// Image sequence loading
+// ============================================================================
+async function loadImageFolder(folderUrl) {
+  // Normalise: strip trailing slash
+  const base = folderUrl.replace(/\/$/, '');
+  state.folderBaseUrl = base;
+  // Parent = one level up (strip /Images)
+  state.parentBaseUrl = base.replace(/\/Images\/?$/, '');
+
+  // We need to discover which Frame_*.png files exist.
+  // Strategy: fetch a manifest file "frame_list.json" if present,
+  // otherwise probe sequentially until we get 404s.
+  // The recommended approach: host a frame_list.json in each Images/ folder.
+  // Fallback: probe up to 2000 frames.
+
+  let urls = [];
+
+  // Try manifest first
+  try {
+    const manifestUrl = joinUrl(base, 'frame_list.json');
+    const resp = await fetch(manifestUrl);
+    if (resp.ok) {
+      const list = await resp.json(); // array of filenames e.g. ["Frame_0000.png", ...]
+      urls = list.map(f => joinUrl(base, f));
+    }
+  } catch (_) {}
+
+  if (urls.length === 0) {
+    // Probe sequentially — try Frame_XXXX.png pattern
+    urls = await probeFrames(base);
+  }
+
+  if (urls.length === 0) {
+    setStatus(`No images found at: ${base}`);
+    return;
+  }
+
+  state.imageUrls = urls;
+  state.midpointFrame = Math.floor(urls.length / 2);
+  state.currentFrame = state.midpointFrame;
+
+  // Reset gaze / thumbnail for new folder
+  state.gazeData = null;
+  state.thumbImage = null;
+  state.thumbMetadata = null;
+  document.getElementById('thumbOverlay').style.display = 'none';
+
+  // Switch to image mode
+  switchToImageMode();
+
+  // Update slider
+  const slider = document.getElementById('frameSlider');
+  const spinbox = document.getElementById('frameSpinbox');
+  slider.max = urls.length - 1;
+  slider.value = state.currentFrame;
+  spinbox.max = urls.length - 1;
+  spinbox.value = state.currentFrame;
+
+  await displayCurrentFrame();
+
+  // Re-enable eye gaze if it was on
+  if (state.gazeEnabled) {
+    await loadGazeData();
+    await displayCurrentFrame();
+  }
+
+  // Re-enable thumbnail if it was on
+  if (state.thumbEnabled) {
+    await loadThumbnailData();
+    if (state.thumbImage) {
+      drawThumbnailOverlay();
+    }
+  }
+
+  setStatus(`Loaded ${urls.length} frames from ${base.split('/').pop()}`);
+}
+
+async function probeFrames(base) {
+  // Try both Frame_ and frame_ prefixes, zero-padded 4 digits
+  const urls = [];
+  // First check what the first frame looks like
+  const candidates = [
+    'Frame_0000.png', 'Frame_0001.png',
+    'frame_0000.png', 'frame_0001.png',
+    'Frame_0000.jpg', 'Frame_0001.jpg',
+  ];
+
+  let prefix = 'Frame_';
+  let ext = '.png';
+  let padded = true;
+  let startIndex = 0;
+
+  for (const c of candidates) {
+    try {
+      const r = await fetch(joinUrl(base, c), { method: 'HEAD' });
+      if (r.ok) {
+        // Determine prefix, ext, start
+        prefix = c.startsWith('f') ? 'frame_' : 'Frame_';
+        ext = c.endsWith('.jpg') ? '.jpg' : '.png';
+        startIndex = c.includes('0000') ? 0 : 1;
+        break;
+      }
+    } catch (_) {}
+  }
+
+  // Probe sequentially
+  for (let i = startIndex; i < 5000; i++) {
+    const pad = String(i).padStart(4, '0');
+    const url = joinUrl(base, `${prefix}${pad}${ext}`);
+    try {
+      const r = await fetch(url, { method: 'HEAD' });
+      if (!r.ok) break;
+      urls.push(url);
+    } catch (_) { break; }
+  }
+
+  return urls;
+}
+
+// ============================================================================
+// Frame display
+// ============================================================================
+async function displayCurrentFrame() {
+  if (!state.imageUrls.length) return;
+  const url = state.imageUrls[state.currentFrame];
+
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      state.imageNaturalW = img.naturalWidth;
+      state.imageNaturalH = img.naturalHeight;
+
+      const area = document.getElementById('imageArea');
+      const canvas = document.getElementById('imageCanvas');
+      const ctx = canvas.getContext('2d');
+
+      const areaW = area.clientWidth;
+      const areaH = area.clientHeight;
+      const scale = Math.min(areaW / img.naturalWidth, areaH / img.naturalHeight, 1);
+      canvas.width = Math.round(img.naturalWidth * scale);
+      canvas.height = Math.round(img.naturalHeight * scale);
+
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      // Eye gaze overlay
+      if (state.gazeEnabled && state.gazeData && state.currentFrame < state.gazeData.length) {
+        drawGazeOverlay(ctx, canvas.width, canvas.height, img.naturalWidth, img.naturalHeight);
+      }
+
+      canvas.style.display = 'block';
+      document.getElementById('imagePlaceholder').style.display = 'none';
+
+      // Update frame info
+      const adj = state.currentFrame - state.midpointFrame;
+      const sign = adj >= 0 ? '+' : '';
+      document.getElementById('frameInfo').textContent =
+        `Frame ${state.currentFrame + 1}/${state.imageUrls.length} (Adjustment: ${sign}${adj} from midpoint)`;
+
+      // Update thumbnail overlay position
+      if (state.thumbEnabled && state.thumbImage) {
+        drawThumbnailOverlay();
+      }
+
+      resolve();
+    };
+    img.onerror = () => { setStatus(`Failed to load frame: ${url}`); resolve(); };
+    img.src = url;
+  });
+}
+
+function setFrame(n) {
+  if (!state.imageUrls.length) return;
+  n = Math.max(0, Math.min(state.imageUrls.length - 1, n));
+  if (n === state.currentFrame) return;
+  state.currentFrame = n;
+  document.getElementById('frameSlider').value = n;
+  document.getElementById('frameSpinbox').value = n;
+  displayCurrentFrame();
+}
+
+function onSliderInput(val) { setFrame(parseInt(val)); }
+function onSpinboxInput(val) { setFrame(parseInt(val)); }
+
+// Mouse wheel on image area
+document.getElementById('imageArea').addEventListener('wheel', (e) => {
+  if (!state.imageUrls.length || state.videoMode) return;
+  e.preventDefault();
+  setFrame(state.currentFrame + (e.deltaY < 0 ? 1 : -1));
+}, { passive: false });
+
+// ============================================================================
+// Mode switching
+// ============================================================================
+function switchToImageMode() {
+  state.videoMode = false;
+  document.getElementById('videoArea').style.display = 'none';
+  document.getElementById('videoControls').style.display = 'none';
+  document.getElementById('imageArea').style.display = 'flex';
+  document.getElementById('imageControls').style.display = 'flex';
+  const v = document.getElementById('videoEl');
+  v.pause(); v.src = '';
+}
+
+function switchToVideoMode() {
+  state.videoMode = true;
+  document.getElementById('imageArea').style.display = 'none';
+  document.getElementById('imageControls').style.display = 'none';
+  document.getElementById('videoArea').style.display = 'flex';
+  document.getElementById('videoControls').style.display = 'flex';
+}
+
+// ============================================================================
+// Video
+// ============================================================================
+function loadVideo(url) {
+  switchToVideoMode();
+  const v = document.getElementById('videoEl');
+  v.src = url;
+  v.load();
+  document.getElementById('videoInfo').textContent = `Video: ${url.split('/').pop()}`;
+  setStatus(`Loaded video: ${url.split('/').pop()}`);
+}
+
+// ============================================================================
+// Eye Gaze
+// ============================================================================
+async function loadGazeData() {
+  if (!state.parentBaseUrl) return;
+  const gazeUrl = joinUrl(state.parentBaseUrl, 'eyeGazeCoords.npy');
+  const metaUrl = joinUrl(state.parentBaseUrl, 'metadata.json');
+
+  // Load metadata for downsample factor
+  try {
+    const resp = await fetch(metaUrl);
+    if (resp.ok) {
+      const meta = await resp.json();
+      state.downsampleFactor = meta.downsample_factor || 1.0;
+    }
+  } catch (_) { state.downsampleFactor = 1.0; }
+
+  // Load .npy file
+  try {
+    const resp = await fetch(gazeUrl);
+    if (!resp.ok) {
+      alert(`eyeGazeCoords.npy not found at:\n${gazeUrl}`);
+      state.gazeEnabled = false;
+      document.getElementById('gazeBtn').classList.remove('active');
+      return;
+    }
+    const buf = await resp.arrayBuffer();
+    state.gazeData = parseNpy(buf);
+    if (!state.gazeData) {
+      alert('Failed to parse eyeGazeCoords.npy');
+      state.gazeEnabled = false;
+      document.getElementById('gazeBtn').classList.remove('active');
+    }
+  } catch (e) {
+    alert(`Error loading eye gaze data: ${e}`);
+    state.gazeEnabled = false;
+    document.getElementById('gazeBtn').classList.remove('active');
+  }
+}
+
+// Minimal .npy parser (float32 or float64, 2D array shape [N,2])
+function parseNpy(buffer) {
+  try {
+    const magic = new Uint8Array(buffer, 0, 6);
+    // magic: \x93NUMPY
+    if (magic[0] !== 0x93) return null;
+
+    const majorVer = new Uint8Array(buffer, 6, 1)[0];
+    let headerLen, headerStart;
+    if (majorVer === 1) {
+      headerLen = new DataView(buffer).getUint16(8, true);
+      headerStart = 10;
+    } else {
+      headerLen = new DataView(buffer).getUint32(8, true);
+      headerStart = 12;
+    }
+
+    const headerBytes = new Uint8Array(buffer, headerStart, headerLen);
+    const header = new TextDecoder().decode(headerBytes);
+
+    // Parse dtype
+    const dtypeMatch = header.match(/'descr':\s*'([^']+)'/);
+    const dtype = dtypeMatch ? dtypeMatch[1] : '<f8';
+    const isFloat32 = dtype.includes('f4');
+    const isLittleEndian = dtype.startsWith('<') || dtype.startsWith('=');
+
+    // Parse shape
+    const shapeMatch = header.match(/'shape':\s*\(([^)]+)\)/);
+    const shapeParts = shapeMatch ? shapeMatch[1].split(',').map(s => parseInt(s.trim())).filter(n => !isNaN(n)) : [];
+    const N = shapeParts[0] || 0;
+
+    const dataOffset = headerStart + headerLen;
+    const view = new DataView(buffer);
+    const result = new Float32Array(N * 2);
+
+    for (let i = 0; i < N; i++) {
+      let x, y;
+      if (isFloat32) {
+        x = view.getFloat32(dataOffset + i * 8, isLittleEndian);
+        y = view.getFloat32(dataOffset + i * 8 + 4, isLittleEndian);
+      } else {
+        x = view.getFloat64(dataOffset + i * 16, isLittleEndian);
+        y = view.getFloat64(dataOffset + i * 16 + 8, isLittleEndian);
+      }
+      result[i * 2] = x;
+      result[i * 2 + 1] = y;
+    }
+    return result;
+  } catch (e) {
+    console.error('npy parse error', e);
+    return null;
+  }
+}
+
+function drawGazeOverlay(ctx, canvasW, canvasH, naturalW, naturalH) {
+  const scaleX = canvasW / naturalW;
+  const scaleY = canvasH / naturalH;
+
+  // Draw 3-point trail (current + previous 2)
+  const trailFrames = [];
+  for (let i = 2; i >= 0; i--) {
+    const fi = state.currentFrame - i;
+    if (fi >= 0 && fi < state.gazeData.length / 2) trailFrames.push({ fi, i });
+  }
+
+  for (const { fi, i } of trailFrames) {
+    const gx = state.gazeData[fi * 2] * scaleX;
+    const gy = state.gazeData[fi * 2 + 1] * scaleY;
+
+    if (gx < 0 || gx > canvasW || gy < 0 || gy > canvasH) continue;
+
+    const isCurrent = (i === 0);
+    const alpha = isCurrent ? 1.0 : (i === 1 ? 0.45 : 0.25);
+    const [r, g, b] = state.gazeColor;
+    ctx.beginPath();
+    ctx.arc(gx, gy, state.gazeSize, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${r},${g},${b},${alpha})`;
+    ctx.fill();
+    if (isCurrent) {
+      ctx.strokeStyle = `rgba(${r},${g},${b},1)`;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    }
+  }
+}
+
+async function toggleGaze() {
+  if (state.videoMode) return;
+  if (!state.imageUrls.length) return;
+
+  state.gazeEnabled = !state.gazeEnabled;
+  const btn = document.getElementById('gazeBtn');
+
+  if (state.gazeEnabled) {
+    btn.classList.add('active');
+    document.getElementById('gazeControls').classList.add('visible');
+    if (!state.gazeData) {
+      await loadGazeData();
+    }
+    if (state.gazeEnabled) {
+      setStatus('Eye gaze overlay enabled');
+    }
+  } else {
+    btn.classList.remove('active');
+    document.getElementById('gazeControls').classList.remove('visible');
+    setStatus('Eye gaze overlay disabled');
+  }
+
+  await displayCurrentFrame();
+}
+
+function onColorChange(hexColor) {
+  const r = parseInt(hexColor.slice(1, 3), 16);
+  const g = parseInt(hexColor.slice(3, 5), 16);
+  const b = parseInt(hexColor.slice(5, 7), 16);
+  state.gazeColor = [r, g, b];
+  document.getElementById('colorSwatch').style.background = hexColor;
+  if (state.gazeEnabled) displayCurrentFrame();
+}
+
+document.getElementById('sizeInput').addEventListener('input', (e) => {
+  state.gazeSize = Math.max(1, parseInt(e.target.value) || 5);
+  if (state.gazeEnabled) displayCurrentFrame();
+});
+
+// ============================================================================
+// Thumbnail
+// ============================================================================
+async function loadThumbnailData() {
+  if (!state.parentBaseUrl) return false;
+  const thumbUrl = joinUrl(state.parentBaseUrl, 'thumbnail.png');
+  const metaUrl = joinUrl(state.parentBaseUrl, 'metadata.json');
+
+  try {
+    const [thumbResp, metaResp] = await Promise.all([fetch(thumbUrl), fetch(metaUrl)]);
+    if (!thumbResp.ok) { alert(`thumbnail.png not found at:\n${thumbUrl}`); return false; }
+    if (!metaResp.ok) { alert(`metadata.json not found at:\n${metaUrl}`); return false; }
+
+    const blob = await thumbResp.blob();
+    state.thumbImage = await createImageBitmap(blob);
+    state.thumbMetadata = await metaResp.json();
+
+    if (!state.thumbMetadata.thumbnail_level || !state.thumbMetadata.image_info) {
+      alert('metadata.json missing required fields (thumbnail_level, image_info)');
+      return false;
+    }
+    return true;
+  } catch (e) {
+    alert(`Error loading thumbnail: ${e}`);
+    return false;
+  }
+}
+
+function drawThumbnailOverlay() {
+  if (!state.thumbImage || !state.thumbMetadata) return;
+  const meta = state.thumbMetadata;
+  const imageInfo = meta.image_info || [];
+  if (state.currentFrame >= imageInfo.length) return;
+
+  const bounds = imageInfo[state.currentFrame]?.viewer_bounds;
+  if (!bounds) return;
+  const [tlx, tly, brx, bry] = bounds;
+
+  const wsiW = meta.wsi_width || 0;
+  const wsiH = meta.wsi_height || 0;
+  const tw = state.thumbImage.width;
+  const th = state.thumbImage.height;
+
+  const sx = wsiW > 0 ? tw / wsiW : 1 / (2 ** meta.thumbnail_level);
+  const sy = wsiH > 0 ? th / wsiH : 1 / (2 ** meta.thumbnail_level);
+
+  const bx = Math.round(tlx * sx);
+  const by = Math.round(tly * sy);
+  const bw = Math.round((brx - tlx) * sx);
+  const bh = Math.round((bry - tly) * sy);
+
+  if (bw <= 0 || bh <= 0) return;
+
+  const DISPLAY_SIZE = 300;
+  const aspect = th / tw;
+  const dispW = DISPLAY_SIZE;
+  const dispH = Math.round(DISPLAY_SIZE * aspect);
+
+  const tc = document.getElementById('thumbCanvas');
+  tc.width = dispW;
+  tc.height = dispH;
+  const ctx = tc.getContext('2d');
+
+  // Draw thumbnail
+  ctx.drawImage(state.thumbImage, 0, 0, dispW, dispH);
+
+  // Scale box to display size
+  const dsx = dispW / tw;
+  const dsy = dispH / th;
+  const dbx = Math.round(bx * dsx);
+  const dby = Math.round(by * dsy);
+  const dbw = Math.round(bw * dsx);
+  const dbh = Math.round(bh * dsy);
+
+  // Fill
+  ctx.fillStyle = 'rgba(0,255,0,0.15)';
+  ctx.fillRect(dbx, dby, dbw, dbh);
+
+  // Outer border green
+  ctx.strokeStyle = '#00ff00';
+  ctx.lineWidth = 4;
+  ctx.strokeRect(dbx, dby, dbw, dbh);
+
+  // Inner border yellow
+  ctx.strokeStyle = '#ffff00';
+  ctx.lineWidth = 2;
+  ctx.strokeRect(dbx + 3, dby + 3, dbw - 6, dbh - 6);
+
+  document.getElementById('thumbOverlay').style.display = 'block';
+}
+
+async function toggleThumbnail() {
+  if (state.videoMode) return;
+  state.thumbEnabled = !state.thumbEnabled;
+  const btn = document.getElementById('thumbBtn');
+
+  if (state.thumbEnabled) {
+    btn.classList.add('active');
+    if (!state.thumbImage) {
+      const ok = await loadThumbnailData();
+      if (!ok) {
+        state.thumbEnabled = false;
+        btn.classList.remove('active');
+        return;
+      }
+    }
+    drawThumbnailOverlay();
+    setStatus('Thumbnail overlay enabled');
+  } else {
+    btn.classList.remove('active');
+    document.getElementById('thumbOverlay').style.display = 'none';
+    setStatus('Thumbnail overlay disabled');
+  }
+}
+
+// ============================================================================
+// Resizer (drag to resize panels)
+// ============================================================================
+(function () {
+  const resizer = document.getElementById('resizer');
+  const pdfPanel = document.getElementById('pdfPanel');
+  let dragging = false;
+
+  resizer.addEventListener('mousedown', (e) => {
+    dragging = true;
+    document.body.style.cursor = 'col-resize';
+    document.body.style.userSelect = 'none';
+  });
+  document.addEventListener('mousemove', (e) => {
+    if (!dragging) return;
+    const mainRect = document.getElementById('main').getBoundingClientRect();
+    const newW = Math.max(180, Math.min(e.clientX - mainRect.left, mainRect.width * 0.7));
+    pdfPanel.style.width = newW + 'px';
+    if (window._pdfResizeTimer) clearTimeout(window._pdfResizeTimer);
+    window._pdfResizeTimer = setTimeout(() => renderPdfPage(), 100);
+  });
+  document.addEventListener('mouseup', () => {
+    dragging = false;
+    document.body.style.cursor = '';
+    document.body.style.userSelect = '';
+  });
+})();
+
+// ============================================================================
+// Window resize — re-render PDF and current frame
+// ============================================================================
+let _resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(_resizeTimer);
+  _resizeTimer = setTimeout(async () => {
+    if (state.pdfDoc) await renderPdfPage();
+    if (state.imageUrls.length && !state.videoMode) await displayCurrentFrame();
+    if (state.thumbEnabled && state.thumbImage) drawThumbnailOverlay();
+  }, 120);
+});
+</script>
+</body>
+</html>

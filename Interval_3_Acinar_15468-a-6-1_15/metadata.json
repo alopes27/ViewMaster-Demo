@@ -1,0 +1,310 @@
+{
+  "timepoint": 154000000.0,
+  "center_csv_idx": 1031,
+  "center_timestamp": 7293268804.0,
+  "start_csv_idx": 1021,
+  "end_csv_idx": 1042,
+  "interval_length": 21,
+  "num_images_saved": 21,
+  "window_size": 10,
+  "downsample_factor": 4.0,
+  "wsi_width": 61440,
+  "wsi_height": 49152,
+  "thumbnail_level": 2,
+  "image_info": [
+    {
+      "frame_idx": 0,
+      "csv_row_idx": 1021,
+      "timestamp": 7292167138,
+      "image_filename": "Frame_0000.png",
+      "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
+      "downsample_factor": 4.0,
+      "viewer_bounds": [
+        28640.23689888961,
+        2311.978146017051,
+        39724.32465678956,
+        9030.38712142784
+      ]
+    },
+    {
+      "frame_idx": 1,
+      "csv_row_idx": 1022,
+      "timestamp": 7292275980,
+      "image_filename": "Frame_0001.png",
+      "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
+      "downsample_factor": 4.0,
+      "viewer_bounds": [
+        28640.23689888961,
+        2311.978146017051,
+        39724.32465678956,
+        9030.38712142784
+      ]
+    },
+    {
+      "frame_idx": 2,
+      "csv_row_idx": 1023,
+      "timestamp": 7292384993,
+      "image_filename": "Frame_0002.png",
+      "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
+      "downsample_factor": 4.0,
+      "viewer_bounds": [
+        30339.144915660145,
+        1961.9001304400904,
+        41423.232673560095,
+        8680.30910585088
+      ]
+    },
+    {
+      "frame_idx": 3,
+      "csv_row_idx": 1024,
+      "timestamp": 7292495198,
+      "image_filename": "Frame_0003.png",
+      "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
+      "downsample_factor": 4.0,
+      "viewer_bounds": [
+        32830.87667359028,
+        901.3696714863562,
+        43914.96443149023,
+        7619.778646897146
+      ]
+    },
+    {
+      "frame_idx": 4,
+      "csv_row_idx": 1025,
+      "timestamp": 7292606192,
+      "image_filename": "Frame_0004.png",
+      "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
+      "downsample_factor": 4.0,
+      "viewer_bounds": [
+        32830.87667359028,
+        901.3696714863562,
+        43914.96443149023,
+        7619.778646897146
+      ]
+    },
+    {
+      "frame_idx": 5,
+      "csv_row_idx": 1026,
+      "timestamp": 7292717258,
+      "image_filename": "Frame_0005.png",
+      "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
+      "downsample_factor": 4.0,
+      "viewer_bounds": [
+        32830.87667359028,
+        901.3696714863562,
+        43914.96443149023,
+        7619.778646897146
+      ]
+    },
+    {
+      "frame_idx": 6,
+      "csv_row_idx": 1027,
+      "timestamp": 7292826242,
+      "image_filename": "Frame_0006.png",
+      "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
+      "downsample_factor": 4.0,
+      "viewer_bounds": [
+        33216.99213194723,
+        4680.152957272962,
+        44301.07988984717,
+        11398.561932683751
+      ]
+    },
+    {
+      "frame_idx": 7,
+      "csv_row_idx": 1028,
+      "timestamp": 7292937833,
+      "image_filename": "Frame_0007.png",
+      "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
+      "downsample_factor": 4.0,
+      "viewer_bounds": [
+        35585.166943203134,
+        7171.884715203093,
+        46669.25470110309,
+        13890.293690613882
+      ]
+    },
+    {
+      "frame_idx": 8,
+      "csv_row_idx": 1029,
+      "timestamp": 7293047936,
+      "image_filename": "Frame_0008.png",
+      "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
+      "downsample_factor": 4.0,
+      "viewer_bounds": [
+        35585.166943203134,
+        7171.884715203093,
+        46669.25470110309,
+        13890.293690613882
+      ]
+    },
+    {
+      "frame_idx": 9,
+      "csv_row_idx": 1030,
+      "timestamp": 7293157338,
+      "image_filename": "Frame_0009.png",
+      "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
+      "downsample_factor": 4.0,
+      "viewer_bounds": [
+        35585.166943203134,
+        7171.884715203093,
+        46669.25470110309,
+        13890.293690613882
+      ]
+    },
+    {
+      "frame_idx": 10,
+      "csv_row_idx": 1031,
+      "timestamp": 7293268804,
+      "image_filename": "Frame_0010.png",
+      "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
+      "downsample_factor": 4.0,
+      "viewer_bounds": [
+        35538.8330882003,
+        9298.093839221983,
+        46622.92084610024,
+        16016.502814632777
+      ]
+    },
+    {
+      "frame_idx": 11,
+      "csv_row_idx": 1032,
+      "timestamp": 7293378918,
+      "image_filename": "Frame_0011.png",
+      "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
+      "downsample_factor": 4.0,
+      "viewer_bounds": [
+        36110.283966568575,
+        10487.32945096137,
+        47194.371724468525,
+        17205.73842637216
+      ]
+    },
+    {
+      "frame_idx": 12,
+      "csv_row_idx": 1033,
+      "timestamp": 7293489086,
+      "image_filename": "Frame_0012.png",
+      "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
+      "downsample_factor": 4.0,
+      "viewer_bounds": [
+        36110.283966568575,
+        10487.32945096137,
+        47194.371724468525,
+        17205.73842637216
+      ]
+    },
+    {
+      "frame_idx": 13,
+      "csv_row_idx": 1034,
+      "timestamp": 7293601190,
+      "image_filename": "Frame_0013.png",
+      "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
+      "downsample_factor": 4.0,
+      "viewer_bounds": [
+        36110.283966568575,
+        10487.32945096137,
+        47194.371724468525,
+        17205.73842637216
+      ]
+    },
+    {
+      "frame_idx": 14,
+      "csv_row_idx": 1035,
+      "timestamp": 7293713224,
+      "image_filename": "Frame_0014.png",
+      "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
+      "downsample_factor": 8.0,
+      "viewer_bounds": [
+        12717.08046549544,
+        -4543.962376601561,
+        67182.36300187124,
+        28469.13270466663
+      ]
+    },
+    {
+      "frame_idx": 15,
+      "csv_row_idx": 1036,
+      "timestamp": 7293824267,
+      "image_filename": "Frame_0015.png",
+      "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
+      "downsample_factor": 8.0,
+      "viewer_bounds": [
+        12717.08046549544,
+        -4543.962376601561,
+        67182.36300187124,
+        28469.13270466663
+      ]
+    },
+    {
+      "frame_idx": 16,
+      "csv_row_idx": 1037,
+      "timestamp": 7293934845,
+      "image_filename": "Frame_0016.png",
+      "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
+      "downsample_factor": 8.0,
+      "viewer_bounds": [
+        12717.08046549544,
+        -4543.962376601561,
+        67182.36300187124,
+        28469.13270466663
+      ]
+    },
+    {
+      "frame_idx": 17,
+      "csv_row_idx": 1038,
+      "timestamp": 7294045963,
+      "image_filename": "Frame_0017.png",
+      "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
+      "downsample_factor": 8.0,
+      "viewer_bounds": [
+        12438.809165959849,
+        -3456.1745693260555,
+        66904.09170233565,
+        29556.92051194213
+      ]
+    },
+    {
+      "frame_idx": 18,
+      "csv_row_idx": 1039,
+      "timestamp": 7294157195,
+      "image_filename": "Frame_0018.png",
+      "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
+      "downsample_factor": 8.0,
+      "viewer_bounds": [
+        4368.941479427623,
+        21487.052825409904,
+        58834.22401580343,
+        54500.147906678096
+      ]
+    },
+    {
+      "frame_idx": 19,
+      "csv_row_idx": 1040,
+      "timestamp": 7294269092,
+      "image_filename": "Frame_0019.png",
+      "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
+      "downsample_factor": 8.0,
+      "viewer_bounds": [
+        3964.183225557668,
+        21487.052825409904,
+        58429.46576193347,
+        54500.147906678096
+      ]
+    },
+    {
+      "frame_idx": 20,
+      "csv_row_idx": 1041,
+      "timestamp": 7294381257,
+      "image_filename": "Frame_0020.png",
+      "source_image": "E:\\For LLM Study\\15468-a-6-1.svs",
+      "downsample_factor": 8.0,
+      "viewer_bounds": [
+        3964.183225557668,
+        21487.052825409904,
+        58429.46576193347,
+        54500.147906678096
+      ]
+    }
+  ]
+}
